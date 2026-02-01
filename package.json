@@ -1,0 +1,56 @@
+{
+  "name": "african-countries",
+  "version": "1.0.0",
+  "description": "GeoJSON data and utilities for African countries with TypeScript support.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "african-countries": "dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "vitest run src/"
+  },
+  "keywords": [
+    "africa",
+    "geojson",
+    "topojson",
+    "countries",
+    "maps",
+    "typescript",
+    "geofencing",
+    "ecowas",
+    "sadc",
+    "eac",
+    "common-market",
+    "gis"
+  ],
+  "author": "TechHive",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/momocoder14/african-countries.git"
+  },
+  "bugs": {
+    "url": "https://github.com/momocoder14/african-countries/issues"
+  },
+  "homepage": "https://github.com/momocoder14/african-countries#readme",
+  "devDependencies": {
+    "@types/geojson": "^7946.0.16",
+    "@types/node": "^25.2.0",
+    "@types/topojson-specification": "^1.0.5",
+    "topojson-server": "^3.0.1",
+    "topojson-simplify": "^3.0.3",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  },
+  "dependencies": {
+    "@turf/boolean-point-in-polygon": "^7.3.3",
+    "@turf/helpers": "^7.3.3",
+    "geojson": "^0.5.0"
+  }
+}
