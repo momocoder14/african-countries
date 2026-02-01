@@ -174,4 +174,6 @@ export function searchCountries(query: string): AfricaFeature[] {
   });
 }
 
+export * from './utils';
+
 export default africaGeoJSON;

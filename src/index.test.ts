@@ -10,7 +10,11 @@ import {
   getCountryFlag,
   searchCountries,
   getCountriesByTradeBloc,
-  isLocationInCountry
+  isLocationInCountry,
+  joinDataToGeoJSON,
+  getChoroplethColor,
+  generateSVGMap,
+  toTerminalASCII
 } from './index';
 
 describe('African Countries Library', () => {
@@ -85,5 +89,37 @@ describe('African Countries Library', () => {
     const egypt = getCountryByCode('EG');
     expect(egypt?.properties.translations?.ar).toBe('مصر');
     expect(egypt?.properties.translations?.fr).toBe('Égypte');
+  });
+
+  describe('Utilities', () => {
+    it('should join external data to GeoJSON', () => {
+      const gdpData = {
+        'NGA': 440,
+        'ZAF': 419,
+        'EGY': 404
+      };
+      const geojson = getAfricaGeoJSON();
+      const enriched = joinDataToGeoJSON(geojson, gdpData);
+      
+      const nigeria = enriched.features.find(f => f.properties && (f.properties as any).alpha3 === 'NGA');
+      expect((nigeria?.properties as any).data).toBe(440);
+    });
+
+    it('should generate choropleth colors', () => {
+      const color = getChoroplethColor(50, 0, 100);
+      expect(color).toMatch(/rgb\(\d+,\d+,\d+\)/);
+    });
+
+    it('should generate SVG map string', () => {
+      const svg = generateSVGMap(getAfricaGeoJSON(), { width: 500, height: 500 });
+      expect(svg).toContain('<svg');
+      expect(svg).toContain('<path');
+      expect(svg).toContain('viewBox="0 0 500 500"');
+    });
+
+    it('should generate terminal ASCII map', () => {
+      const ascii = toTerminalASCII(getAfricaGeoJSON(), 20, 10);
+      expect(ascii).toContain('▓');
+    });
   });
 });

@@ -1,6 +1,6 @@
 {
   "name": "african-countries",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "GeoJSON data and utilities for African countries with TypeScript support.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

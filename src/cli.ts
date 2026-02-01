@@ -7,7 +7,9 @@ import {
   getCountriesByRegion, 
   getCountriesByTradeBloc,
   isLocationInCountry,
-  africaGeoJSON
+  africaGeoJSON,
+  generateSVGMap,
+  toTerminalASCII
 } from './index';
 
 const args = process.argv.slice(2);
@@ -23,9 +25,11 @@ Commands:
   list                 List all country names
   get <name|code>      Get details for a specific country
   search <query>       Search for countries by name, code, or capital
-  region <region>      List countries in a specific region (e.g., Western Africa)
-  bloc <bloc>          List countries in a trade bloc (ECOWAS, SADC, etc.)
+  region <region>      List countries in a specific region
+  bloc <bloc>          List countries in a trade bloc
   within <lat> <lng>   Find which country a coordinate belongs to
+  render               Preview the African map in terminal
+  export-svg           Output SVG map of Africa to stdout
   export               Output the full GeoJSON to stdout
   help                 Show this help message
   `);
@@ -109,6 +113,14 @@ switch (command) {
     } else {
       console.log('Location is not within any African country in the dataset.');
     }
+    break;
+
+  case 'render':
+    console.log(toTerminalASCII(africaGeoJSON));
+    break;
+
+  case 'export-svg':
+    console.log(generateSVGMap(africaGeoJSON, { width: 800, height: 800 }));
     break;
 
   case 'export':

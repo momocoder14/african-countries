@@ -9,7 +9,9 @@ Enhanced GeoJSON data and utilities for African countries with TypeScript suppor
 - **Centroids & Bounding Boxes**: `centroid` and `bbox` coordinates for map markers and zooming.
 - **Flags & i18n**: Flag emojis and country names translated into FR, AR, PT, and SW.
 - **Multiple Formats**: Includes TopoJSON and High/Low resolutions.
-- **CLI Tool**: Powerful terminal interface for data lookup and spatial queries.
+- **Map Rendering**: Built-in SVG generators and ASCII terminal previews.
+- **Data Population**: Helpers to join external data (GDP, pop, etc.) for choropleth maps.
+- **CLI Tool**: Powerful terminal interface for data lookup and map rendering.
 - **TypeScript Support**: Fully typed interfaces for all properties.
 
 ## Installation
@@ -33,6 +35,12 @@ npx african-countries bloc ECOWAS
 
 # Search for countries
 npx african-countries search Nig
+
+# Preview map in terminal
+npx african-countries render
+
+# Export SVG map
+npx african-countries export-svg > africa.svg
 ```
 
 ## Usage
@@ -100,6 +108,18 @@ Returns all country names.
 
 #### `searchCountries(query: string)`
 Searches by name, code, or capital.
+
+#### `generateSVGMap(geojson, dimensions, colorResolver?)`
+Returns a full SVG string for rendering maps.
+
+#### `joinDataToGeoJSON(geojson, externalData, joinKey?)`
+Merges external JS objects into GeoJSON properties for data visualization.
+
+#### `getChoroplethColor(value, min, max, startColor?, endColor?)`
+Generates an RGB color for data mapping.
+
+#### `toTerminalASCII(geojson, cols?, rows?)`
+Generates a string representing the map in terminal-friendly characters.
 
 ## License
 MIT
