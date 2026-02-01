@@ -4,15 +4,14 @@ Enhanced GeoJSON data and utilities for African countries with TypeScript suppor
 
 ## Features
 
-- **Rich Metadata**: Each country includes ISO codes, region, capital, **currency**, **dialing codes**, and **trade blocs**.
+- **Rich Metadata**: Each country includes ISO codes, region, capital, **currency**, **dialing codes**, **trade blocs**, and **neighboring countries**.
 - **Spatial Analysis**: Built-in geofencing to check if coordinates are within a specific country.
 - **Centroids & Bounding Boxes**: `centroid` and `bbox` coordinates for map markers and zooming.
 - **Flags & i18n**: Flag emojis and country names translated into FR, AR, PT, and SW.
-- **Multiple Formats**: Includes TopoJSON and High/Low resolutions.
-- **Map Rendering**: Built-in SVG generators and ASCII terminal previews.
-- **Data Population**: Helpers to join external data (GDP, pop, etc.) for choropleth maps.
-- **CLI Tool**: Powerful terminal interface for data lookup and map rendering.
-- **TypeScript Support**: Fully typed interfaces for all properties.
+- **Advanced Map Rendering**: Built-in SVG generators with **Albers Equal Area Africa** projection support.
+- **CLI Tool**: Powerful terminal interface including a **Geography Quiz** mode.
+- **React Support**: Built-in `useAfricaMap` hook for modern web applications.
+- **Thematic Palettes**: Beautiful color presets like `Serengeti`, `Sahara`, and `Rainforest`.
 
 ## Installation
 
@@ -39,11 +38,30 @@ npx african-countries search Nig
 # Preview map in terminal
 npx african-countries render
 
+# Play the geography quiz
+npx african-countries quiz
+
 # Export SVG map
 npx african-countries export-svg > africa.svg
 ```
 
 ## Usage
+
+### React Hook Example
+
+```tsx
+import { useAfricaMap } from 'african-countries';
+
+function MapComponent() {
+  const { svgString, hoveredCountry } = useAfricaMap({
+    dimensions: { width: 600, height: 600 }
+  });
+
+  return <div dangerouslySetInnerHTML={{ __html: svgString }} />;
+}
+```
+
+### Neighbors & Relationships
 
 For more detailed examples, check the [examples/](examples/) folder in the repository.
 

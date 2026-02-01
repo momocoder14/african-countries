@@ -34,6 +34,12 @@
         "tradeBlocs": [
           "SADC",
           "ECCAS"
+        ],
+        "neighbors": [
+          "COD",
+          "COG",
+          "NAM",
+          "ZMB"
         ]
       },
       "geometry": {
@@ -385,6 +391,11 @@
           "EAC",
           "COMESA",
           "ECCAS"
+        ],
+        "neighbors": [
+          "COD",
+          "RWA",
+          "TZA"
         ]
       },
       "geometry": {
@@ -480,6 +491,12 @@
         "dialingCode": "+229",
         "tradeBlocs": [
           "ECOWAS"
+        ],
+        "neighbors": [
+          "BFA",
+          "NER",
+          "NGA",
+          "TGO"
         ]
       },
       "geometry": {
@@ -623,6 +640,14 @@
         "dialingCode": "+226",
         "tradeBlocs": [
           "ECOWAS"
+        ],
+        "neighbors": [
+          "BEN",
+          "CIV",
+          "GHA",
+          "MLI",
+          "NER",
+          "TGO"
         ]
       },
       "geometry": {
@@ -823,6 +848,12 @@
         "tradeBlocs": [
           "SADC",
           "SACU"
+        ],
+        "neighbors": [
+          "NAM",
+          "ZAF",
+          "ZMB",
+          "ZWE"
         ]
       },
       "geometry": {
@@ -1027,6 +1058,14 @@
         "tradeBlocs": [
           "CEMAC",
           "ECCAS"
+        ],
+        "neighbors": [
+          "CMR",
+          "COD",
+          "COG",
+          "SDN",
+          "SSD",
+          "TCD"
         ]
       },
       "geometry": {
@@ -1318,6 +1357,13 @@
         "dialingCode": "+225",
         "tradeBlocs": [
           "ECOWAS"
+        ],
+        "neighbors": [
+          "BFA",
+          "GHA",
+          "GIN",
+          "LBR",
+          "MLI"
         ]
       },
       "geometry": {
@@ -1546,6 +1592,15 @@
         "tradeBlocs": [
           "CEMAC",
           "ECCAS"
+        ],
+        "neighbors": [
+          "CAF",
+          "COG",
+          "GAB",
+          "GNQ",
+          "NER",
+          "NGA",
+          "TCD"
         ]
       },
       "geometry": {
@@ -1836,6 +1891,17 @@
           "EAC",
           "COMESA",
           "ECCAS"
+        ],
+        "neighbors": [
+          "AGO",
+          "BDI",
+          "CAF",
+          "COG",
+          "RWA",
+          "SSD",
+          "TZA",
+          "UGA",
+          "ZMB"
         ]
       },
       "geometry": {
@@ -2368,6 +2434,13 @@
         "tradeBlocs": [
           "CEMAC",
           "ECCAS"
+        ],
+        "neighbors": [
+          "AGO",
+          "CAF",
+          "CMR",
+          "COD",
+          "GAB"
         ]
       },
       "geometry": {
@@ -2608,6 +2681,11 @@
         "tradeBlocs": [
           "COMESA",
           "IGAD"
+        ],
+        "neighbors": [
+          "ERI",
+          "ETH",
+          "SOM"
         ]
       },
       "geometry": {
@@ -2711,6 +2789,15 @@
         "dialingCode": "+213",
         "tradeBlocs": [
           "AMU"
+        ],
+        "neighbors": [
+          "ESH",
+          "LBY",
+          "MAR",
+          "MLI",
+          "MRT",
+          "NER",
+          "TUN"
         ]
       },
       "geometry": {
@@ -3002,6 +3089,10 @@
         "dialingCode": "+20",
         "tradeBlocs": [
           "COMESA"
+        ],
+        "neighbors": [
+          "LBY",
+          "SDN"
         ]
       },
       "geometry": {
@@ -3214,6 +3305,11 @@
         "tradeBlocs": [
           "COMESA",
           "IGAD"
+        ],
+        "neighbors": [
+          "DJI",
+          "ETH",
+          "SDN"
         ]
       },
       "geometry": {
@@ -3370,6 +3466,14 @@
         "tradeBlocs": [
           "COMESA",
           "IGAD"
+        ],
+        "neighbors": [
+          "DJI",
+          "ERI",
+          "KEN",
+          "SDN",
+          "SOM",
+          "SSD"
         ]
       },
       "geometry": {
@@ -3650,6 +3754,11 @@
         "tradeBlocs": [
           "CEMAC",
           "ECCAS"
+        ],
+        "neighbors": [
+          "CMR",
+          "COG",
+          "GNQ"
         ]
       },
       "geometry": {
@@ -3817,6 +3926,11 @@
         "dialingCode": "+233",
         "tradeBlocs": [
           "ECOWAS"
+        ],
+        "neighbors": [
+          "BFA",
+          "CIV",
+          "TGO"
         ]
       },
       "geometry": {
@@ -3960,6 +4074,14 @@
         "dialingCode": "+224",
         "tradeBlocs": [
           "ECOWAS"
+        ],
+        "neighbors": [
+          "CIV",
+          "GNB",
+          "LBR",
+          "MLI",
+          "SEN",
+          "SLE"
         ]
       },
       "geometry": {
@@ -4283,6 +4405,9 @@
         "dialingCode": "+220",
         "tradeBlocs": [
           "ECOWAS"
+        ],
+        "neighbors": [
+          "SEN"
         ]
       },
       "geometry": {
@@ -4390,6 +4515,10 @@
         "dialingCode": "+245",
         "tradeBlocs": [
           "ECOWAS"
+        ],
+        "neighbors": [
+          "GIN",
+          "SEN"
         ]
       },
       "geometry": {
@@ -4510,6 +4639,10 @@
         "tradeBlocs": [
           "CEMAC",
           "ECCAS"
+        ],
+        "neighbors": [
+          "CMR",
+          "GAB"
         ]
       },
       "geometry": {
@@ -4583,6 +4716,13 @@
           "EAC",
           "COMESA",
           "IGAD"
+        ],
+        "neighbors": [
+          "ETH",
+          "SOM",
+          "SSD",
+          "TZA",
+          "UGA"
         ]
       },
       "geometry": {
@@ -4774,6 +4914,11 @@
         "dialingCode": "+231",
         "tradeBlocs": [
           "ECOWAS"
+        ],
+        "neighbors": [
+          "CIV",
+          "GIN",
+          "SLE"
         ]
       },
       "geometry": {
@@ -4926,6 +5071,14 @@
         "tradeBlocs": [
           "AMU",
           "COMESA"
+        ],
+        "neighbors": [
+          "DZA",
+          "EGY",
+          "NER",
+          "SDN",
+          "TCD",
+          "TUN"
         ]
       },
       "geometry": {
@@ -5194,6 +5347,9 @@
         "tradeBlocs": [
           "SADC",
           "SACU"
+        ],
+        "neighbors": [
+          "ZAF"
         ]
       },
       "geometry": {
@@ -5285,6 +5441,10 @@
         "dialingCode": "+212",
         "tradeBlocs": [
           "AMU"
+        ],
+        "neighbors": [
+          "DZA",
+          "ESH"
         ]
       },
       "geometry": {
@@ -5585,7 +5745,8 @@
         "tradeBlocs": [
           "SADC",
           "COMESA"
-        ]
+        ],
+        "neighbors": []
       },
       "geometry": {
         "type": "Polygon",
@@ -5824,6 +5985,15 @@
         "dialingCode": "+223",
         "tradeBlocs": [
           "ECOWAS"
+        ],
+        "neighbors": [
+          "BFA",
+          "CIV",
+          "DZA",
+          "GIN",
+          "MRT",
+          "NER",
+          "SEN"
         ]
       },
       "geometry": {
@@ -6171,6 +6341,14 @@
         "dialingCode": "+258",
         "tradeBlocs": [
           "SADC"
+        ],
+        "neighbors": [
+          "MWI",
+          "SWZ",
+          "TZA",
+          "ZAF",
+          "ZMB",
+          "ZWE"
         ]
       },
       "geometry": {
@@ -6522,6 +6700,12 @@
         "dialingCode": "+222",
         "tradeBlocs": [
           "AMU"
+        ],
+        "neighbors": [
+          "DZA",
+          "ESH",
+          "MLI",
+          "SEN"
         ]
       },
       "geometry": {
@@ -6722,6 +6906,10 @@
         "tradeBlocs": [
           "SADC",
           "COMESA"
+        ],
+        "neighbors": [
+          "MOZ",
+          "ZMB"
         ]
       },
       "geometry": {
@@ -6878,6 +7066,12 @@
         "tradeBlocs": [
           "SADC",
           "SACU"
+        ],
+        "neighbors": [
+          "AGO",
+          "BWA",
+          "ZAF",
+          "ZMB"
         ]
       },
       "geometry": {
@@ -7097,6 +7291,16 @@
         "dialingCode": "+227",
         "tradeBlocs": [
           "ECOWAS"
+        ],
+        "neighbors": [
+          "BEN",
+          "BFA",
+          "CMR",
+          "DZA",
+          "LBY",
+          "MLI",
+          "NGA",
+          "TCD"
         ]
       },
       "geometry": {
@@ -7372,6 +7576,11 @@
         "dialingCode": "+234",
         "tradeBlocs": [
           "ECOWAS"
+        ],
+        "neighbors": [
+          "BEN",
+          "CMR",
+          "NER"
         ]
       },
       "geometry": {
@@ -7649,6 +7858,12 @@
           "EAC",
           "COMESA",
           "ECCAS"
+        ],
+        "neighbors": [
+          "BDI",
+          "COD",
+          "TZA",
+          "UGA"
         ]
       },
       "geometry": {
@@ -7739,7 +7954,12 @@
         },
         "currency": null,
         "dialingCode": null,
-        "tradeBlocs": []
+        "tradeBlocs": [],
+        "neighbors": [
+          "DZA",
+          "MAR",
+          "MRT"
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -7895,6 +8115,15 @@
         "tradeBlocs": [
           "COMESA",
           "IGAD"
+        ],
+        "neighbors": [
+          "CAF",
+          "EGY",
+          "ERI",
+          "ETH",
+          "LBY",
+          "SSD",
+          "TCD"
         ]
       },
       "geometry": {
@@ -8255,6 +8484,14 @@
         "tradeBlocs": [
           "EAC",
           "IGAD"
+        ],
+        "neighbors": [
+          "CAF",
+          "COD",
+          "ETH",
+          "KEN",
+          "SDN",
+          "UGA"
         ]
       },
       "geometry": {
@@ -8550,6 +8787,13 @@
         "dialingCode": "+221",
         "tradeBlocs": [
           "ECOWAS"
+        ],
+        "neighbors": [
+          "GIN",
+          "GMB",
+          "GNB",
+          "MLI",
+          "MRT"
         ]
       },
       "geometry": {
@@ -8769,6 +9013,10 @@
         "dialingCode": "+232",
         "tradeBlocs": [
           "ECOWAS"
+        ],
+        "neighbors": [
+          "GIN",
+          "LBR"
         ]
       },
       "geometry": {
@@ -8891,7 +9139,8 @@
           "ar": "صوماليلاند",
           "pt": "Somalilândia",
           "sw": "Somaliland"
-        }
+        },
+        "neighbors": []
       },
       "geometry": {
         "type": "Polygon",
@@ -9032,6 +9281,11 @@
           "EAC",
           "COMESA",
           "IGAD"
+        ],
+        "neighbors": [
+          "DJI",
+          "ETH",
+          "KEN"
         ]
       },
       "geometry": {
@@ -9221,6 +9475,10 @@
           "SADC",
           "COMESA",
           "SACU"
+        ],
+        "neighbors": [
+          "MOZ",
+          "ZAF"
         ]
       },
       "geometry": {
@@ -9309,6 +9567,13 @@
         "tradeBlocs": [
           "CEMAC",
           "ECCAS"
+        ],
+        "neighbors": [
+          "CAF",
+          "CMR",
+          "LBY",
+          "NER",
+          "SDN"
         ]
       },
       "geometry": {
@@ -9584,6 +9849,11 @@
         "dialingCode": "+228",
         "tradeBlocs": [
           "ECOWAS"
+        ],
+        "neighbors": [
+          "BEN",
+          "BFA",
+          "GHA"
         ]
       },
       "geometry": {
@@ -9704,6 +9974,10 @@
         "tradeBlocs": [
           "AMU",
           "COMESA"
+        ],
+        "neighbors": [
+          "DZA",
+          "LBY"
         ]
       },
       "geometry": {
@@ -9872,6 +10146,15 @@
         "tradeBlocs": [
           "SADC",
           "EAC"
+        ],
+        "neighbors": [
+          "BDI",
+          "COD",
+          "KEN",
+          "MOZ",
+          "RWA",
+          "UGA",
+          "ZMB"
         ]
       },
       "geometry": {
@@ -10113,6 +10396,13 @@
           "EAC",
           "COMESA",
           "IGAD"
+        ],
+        "neighbors": [
+          "COD",
+          "KEN",
+          "RWA",
+          "SSD",
+          "TZA"
         ]
       },
       "geometry": {
@@ -10265,6 +10555,14 @@
         "tradeBlocs": [
           "SADC",
           "SACU"
+        ],
+        "neighbors": [
+          "BWA",
+          "LSO",
+          "MOZ",
+          "NAM",
+          "SWZ",
+          "ZWE"
         ]
       },
       "geometry": {
@@ -10687,6 +10985,16 @@
         "tradeBlocs": [
           "SADC",
           "COMESA"
+        ],
+        "neighbors": [
+          "AGO",
+          "BWA",
+          "COD",
+          "MOZ",
+          "MWI",
+          "NAM",
+          "TZA",
+          "ZWE"
         ]
       },
       "geometry": {
@@ -10975,6 +11283,12 @@
         "tradeBlocs": [
           "SADC",
           "COMESA"
+        ],
+        "neighbors": [
+          "BWA",
+          "MOZ",
+          "ZAF",
+          "ZMB"
         ]
       },
       "geometry": {

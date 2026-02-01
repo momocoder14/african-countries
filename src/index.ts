@@ -31,6 +31,7 @@ export interface AfricaCountryProperties {
   };
   dialingCode?: string;
   tradeBlocs?: string[];
+  neighbors?: string[];
 }
 
 export type AfricaFeature = Feature<Geometry, AfricaCountryProperties>;
@@ -172,6 +173,16 @@ export function searchCountries(query: string): AfricaFeature[] {
       capital.toLowerCase().includes(normalizedQuery)
     );
   });
+}
+
+/**
+ * Returns the neighbors of a country.
+ * @param nameOrCode Country name, alpha-2, or alpha-3 code
+ */
+export function getCountryNeighbors(nameOrCode: string): AfricaFeature[] {
+  const country = getCountryByName(nameOrCode) || getCountryByCode(nameOrCode);
+  const codes = country?.properties.neighbors || [];
+  return codes.map(code => getCountryByCode(code)).filter(Boolean) as AfricaFeature[];
 }
 
 export * from './utils';

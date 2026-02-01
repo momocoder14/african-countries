@@ -1,6 +1,6 @@
 {
   "name": "african-countries",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "GeoJSON data and utilities for African countries with TypeScript support.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,7 +27,9 @@
     "sadc",
     "eac",
     "common-market",
-    "gis"
+    "gis",
+    "react-hook",
+    "africa-map"
   ],
   "author": "TechHive",
   "license": "MIT",
@@ -39,10 +41,15 @@
     "url": "https://github.com/momocoder14/african-countries/issues"
   },
   "homepage": "https://github.com/momocoder14/african-countries#readme",
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
   "devDependencies": {
     "@types/geojson": "^7946.0.16",
     "@types/node": "^25.2.0",
+    "@types/react": "^19.0.8",
     "@types/topojson-specification": "^1.0.5",
+    "react": "^19.0.0",
     "topojson-server": "^3.0.1",
     "topojson-simplify": "^3.0.3",
     "typescript": "^5.9.3",

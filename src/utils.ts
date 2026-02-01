@@ -7,6 +7,21 @@ export interface MapDimensions {
 }
 
 /**
+ * Supported map projections.
+ */
+export type ProjectionType = 'equirectangular' | 'albers';
+
+/**
+ * Thematic color palettes for African maps.
+ */
+export const PALETTES = {
+  Serengeti: [[255, 230, 150], [130, 160, 50], [50, 100, 20]] as [number, number, number][],
+  Sahara: [[255, 220, 130], [210, 130, 50], [130, 60, 20]] as [number, number, number][],
+  Rainforest: [[200, 255, 200], [50, 200, 50], [0, 80, 0]] as [number, number, number][],
+  techhive: [[240, 240, 255], [100, 100, 255], [0, 0, 150]] as [number, number, number][]
+};
+
+/**
  * Merges external data into GeoJSON features based on a key (default is alpha3 code).
  */
 export function joinDataToGeoJSON<T>(
@@ -37,34 +52,70 @@ export function getChoroplethColor(
   value: number,
   min: number,
   max: number,
-  startColor: [number, number, number] = [240, 240, 240], // Light Gray
-  endColor: [number, number, number] = [0, 100, 0]      // Dark Green
+  palette: [number, number, number][] = [[240, 240, 240], [0, 100, 0]]
 ): string {
-  if (max === min) return `rgb(${endColor.join(',')})`;
+  if (max === min) return `rgb(${palette[palette.length - 1].join(',')})`;
   const ratio = Math.max(0, Math.min(1, (value - min) / (max - min)));
-  const r = Math.round(startColor[0] + (endColor[0] - startColor[0]) * ratio);
-  const g = Math.round(startColor[1] + (endColor[1] - startColor[1]) * ratio);
-  const b = Math.round(startColor[2] + (endColor[2] - startColor[2]) * ratio);
+  
+  // Multi-stop palette interpolation
+  const stopCount = palette.length - 1;
+  const stopIndex = Math.min(Math.floor(ratio * stopCount), stopCount - 1);
+  const stopRatio = (ratio * stopCount) - stopIndex;
+  
+  const start = palette[stopIndex];
+  const end = palette[stopIndex + 1];
+  
+  const r = Math.round(start[0] + (end[0] - start[0]) * stopRatio);
+  const g = Math.round(start[1] + (end[1] - start[1]) * stopRatio);
+  const b = Math.round(start[2] + (end[2] - start[2]) * stopRatio);
   return `rgb(${r},${g},${b})`;
 }
 
 /**
  * Generates an SVG path 'd' attribute for a GeoJSON geometry.
- * Projected specifically for the Africa continent.
  */
 export function toSVGPath(
   feature: Feature | Geometry,
-  { width, height, padding = 10 }: MapDimensions
+  { width, height, padding = 10 }: MapDimensions,
+  projection: ProjectionType = 'albers'
 ): string {
   // African Bounding Box approx for projection: [-20 (W), -35 (S), 55 (E), 40 (N)]
   const bbox = [-20, -35, 55, 40];
-  const scaleX = (width - padding * 2) / (bbox[2] - bbox[0]);
-  const scaleY = (height - padding * 2) / (bbox[3] - bbox[1]);
-
-  const project = (coord: [number, number]): [number, number] => [
-    padding + (coord[0] - bbox[0]) * scaleX,
-    height - (padding + (coord[1] - bbox[1]) * scaleY) // Invert Y
-  ];
+  
+  const project = (coord: [number, number]): [number, number] => {
+    if (projection === 'albers') {
+      // Simplified Albers-like projection for Africa
+      const lat0 = 0, lon0 = 20, phi1 = -20, phi2 = 20;
+      const n = (Math.sin(phi1 * Math.PI / 180) + Math.sin(phi2 * Math.PI / 180)) / 2;
+      const C = Math.pow(Math.cos(phi1 * Math.PI / 180), 2) + 2 * n * Math.sin(phi1 * Math.PI / 180);
+      const rho0 = Math.sqrt(C - 2 * n * Math.sin(lat0 * Math.PI / 180)) / n;
+      
+      const lon = coord[0], lat = coord[1];
+      const theta = n * (lon - lon0) * Math.PI / 180;
+      const rho = Math.sqrt(C - 2 * n * Math.sin(lat * Math.PI / 180)) / n;
+      
+      const x = rho * Math.sin(theta);
+      const y = rho0 - rho * Math.cos(theta);
+      
+      // Map Albers range back to dimensions
+      // Approx range for Africa in Albers: X [-0.7, 0.7], Y [-0.8, 0.8]
+      const ax = (x + 0.7) / 1.4;
+      const ay = (y + 0.8) / 1.6;
+      
+      return [
+        padding + ax * (width - padding * 2),
+        height - (padding + ay * (height - padding * 2))
+      ];
+    } else {
+      // Equirectangular
+      const scaleX = (width - padding * 2) / (bbox[2] - bbox[0]);
+      const scaleY = (height - padding * 2) / (bbox[3] - bbox[1]);
+      return [
+        padding + (coord[0] - bbox[0]) * scaleX,
+        height - (padding + (coord[1] - bbox[1]) * scaleY)
+      ];
+    }
+  };
 
   const processGeometry = (geom: any): string => {
     if (geom.type === 'Polygon') {
@@ -98,10 +149,14 @@ export function toSVGPath(
 export function generateSVGMap(
   geojson: FeatureCollection,
   dimensions: MapDimensions,
-  colorResolver?: (feature: any) => string
+  options: { 
+    colorResolver?: (feature: any) => string,
+    projection?: ProjectionType
+  } = {}
 ): string {
+  const { colorResolver, projection = 'albers' } = options;
   const paths = geojson.features.map(feature => {
-    const d = toSVGPath(feature, dimensions);
+    const d = toSVGPath(feature, dimensions, projection);
     const fill = colorResolver ? colorResolver(feature) : '#cccccc';
     return `<path d="${d}" fill="${fill}" stroke="#ffffff" stroke-width="0.5">
       <title>${feature.properties?.name}</title>
@@ -109,6 +164,7 @@ export function generateSVGMap(
   }).join('\n');
 
   return `<svg viewBox="0 0 ${dimensions.width} ${dimensions.height}" xmlns="http://www.w3.org/2000/svg" style="background: #f0f8ff;">
+  <rect width="100%" height="100%" fill="#f0f8ff" />
   ${paths}
 </svg>`;
 }

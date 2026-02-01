@@ -11,10 +11,12 @@ import {
   searchCountries,
   getCountriesByTradeBloc,
   isLocationInCountry,
+  getCountryNeighbors,
   joinDataToGeoJSON,
   getChoroplethColor,
   generateSVGMap,
-  toTerminalASCII
+  toTerminalASCII,
+  PALETTES
 } from './index';
 
 describe('African Countries Library', () => {
@@ -91,6 +93,14 @@ describe('African Countries Library', () => {
     expect(egypt?.properties.translations?.fr).toBe('Égypte');
   });
 
+  it('should return neighboring countries', () => {
+    const neighbors = getCountryNeighbors('Nigeria');
+    const names = neighbors.map(c => c.properties.name);
+    expect(names).toContain('Benin');
+    expect(names).toContain('Cameroon');
+    expect(names).toContain('Niger');
+  });
+
   describe('Utilities', () => {
     it('should join external data to GeoJSON', () => {
       const gdpData = {
@@ -105,13 +115,13 @@ describe('African Countries Library', () => {
       expect((nigeria?.properties as any).data).toBe(440);
     });
 
-    it('should generate choropleth colors', () => {
-      const color = getChoroplethColor(50, 0, 100);
+    it('should generate choropleth colors with palettes', () => {
+      const color = getChoroplethColor(50, 0, 100, PALETTES.Serengeti);
       expect(color).toMatch(/rgb\(\d+,\d+,\d+\)/);
     });
 
-    it('should generate SVG map string', () => {
-      const svg = generateSVGMap(getAfricaGeoJSON(), { width: 500, height: 500 });
+    it('should generate SVG map with Albers projection', () => {
+      const svg = generateSVGMap(getAfricaGeoJSON(), { width: 500, height: 500 }, { projection: 'albers' });
       expect(svg).toContain('<svg');
       expect(svg).toContain('<path');
       expect(svg).toContain('viewBox="0 0 500 500"');

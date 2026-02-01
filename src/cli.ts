@@ -8,6 +8,7 @@ import {
   getCountriesByTradeBloc,
   isLocationInCountry,
   africaGeoJSON,
+  getAfricaGeoJSON,
   generateSVGMap,
   toTerminalASCII
 } from './index';
@@ -29,10 +30,53 @@ Commands:
   bloc <bloc>          List countries in a trade bloc
   within <lat> <lng>   Find which country a coordinate belongs to
   render               Preview the African map in terminal
+  quiz                 Start a fun African geography quiz
   export-svg           Output SVG map of Africa to stdout
   export               Output the full GeoJSON to stdout
   help                 Show this help message
   `);
+}
+
+async function startQuiz() {
+  const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  const question = (query: string) => new Promise((resolve) => readline.question(query, resolve));
+  const countries = [...getAfricaGeoJSON().features].sort(() => Math.random() - 0.5).slice(0, 5);
+  
+  console.log("\n🌍 Welcome to the African Geography Quiz! (5 Questions)");
+  console.log("----------------------------------------------------\n");
+
+  let score = 0;
+  for (let i = 0; i < countries.length; i++) {
+    const country = countries[i];
+    const type = Math.random() > 0.5 ? 'capital' : 'name';
+    let answer;
+    
+    if (type === 'capital') {
+      answer = await question(`${i + 1}. What is the capital of ${country.properties.name}? `);
+      if ((answer as string).toLowerCase() === country.properties.capital.toLowerCase()) {
+        console.log("✅ Correct!\n");
+        score++;
+      } else {
+        console.log(`❌ Wrong! The capital is ${country.properties.capital}\n`);
+      }
+    } else {
+      answer = await question(`${i + 1}. Which country has the flag ${country.properties.flag}? `);
+      if ((answer as string).toLowerCase() === country.properties.name.toLowerCase()) {
+        console.log("✅ Correct!\n");
+        score++;
+      } else {
+        console.log(`❌ Wrong! That is the flag of ${country.properties.name}\n`);
+      }
+    }
+  }
+
+  console.log(`Final Score: ${score}/5`);
+  if (score === 5) console.log("🏆 Excellence! You are an Africa Expert!");
+  readline.close();
 }
 
 switch (command) {
@@ -117,6 +161,10 @@ switch (command) {
 
   case 'render':
     console.log(toTerminalASCII(africaGeoJSON));
+    break;
+
+  case 'quiz':
+    startQuiz();
     break;
 
   case 'export-svg':
