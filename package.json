@@ -1,5 +1,5 @@
 {
-  "name": "@momocoder14/african-countries",
+  "name": "african-countries-geographic",
   "version": "1.0.0",
   "description": "GeoJSON data and utilities for African countries with TypeScript support.",
   "main": "dist/index.js",
