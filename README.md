@@ -1,6 +1,4 @@
 # african-countries
-<<<<<<< HEAD
-=======
 
 Enhanced GeoJSON data and utilities for African countries with TypeScript support.
 
@@ -111,4 +109,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
 Created with ❤️ for the African tech community.
->>>>>>> b06c55b (Initialize project: Enhanced GeoJSON, Spatial API, CLI, and TopoJSON support)
