@@ -10,6 +10,7 @@ import {
   africaGeoJSON,
   getAfricaGeoJSON,
   generateSVGMap,
+  generateCountrySVGMap,
   toTerminalASCII
 } from './index';
 
@@ -30,6 +31,7 @@ Commands:
   bloc <bloc>          List countries in a trade bloc
   within <lat> <lng>   Find which country a coordinate belongs to
   render               Preview the African map in terminal
+  render-country <name> Render a specific country's SVG
   quiz                 Start a fun African geography quiz
   export-svg           Output SVG map of Africa to stdout
   export               Output the full GeoJSON to stdout
@@ -161,6 +163,20 @@ switch (command) {
 
   case 'render':
     console.log(toTerminalASCII(africaGeoJSON));
+    break;
+
+  case 'render-country':
+    if (!param) {
+      console.error('Please provide a country name or code.');
+      process.exit(1);
+    }
+    const target = getCountryByName(param) || getCountryByCode(param);
+    if (target) {
+      console.log(generateCountrySVGMap(target as any, { width: 500, height: 500 }));
+    } else {
+      console.error(`Country not found: ${param}`);
+      process.exit(1);
+    }
     break;
 
   case 'quiz':

@@ -1,4 +1,5 @@
 import { FeatureCollection, Feature, Geometry } from 'geojson';
+import bbox from '@turf/bbox';
 
 export interface MapDimensions {
   width: number;
@@ -77,14 +78,20 @@ export function getChoroplethColor(
 export function toSVGPath(
   feature: Feature | Geometry,
   { width, height, padding = 10 }: MapDimensions,
-  projection: ProjectionType = 'albers'
+  options: { 
+    projection?: ProjectionType, 
+    customBbox?: [number, number, number, number] 
+  } = {}
 ): string {
-  // African Bounding Box approx for projection: [-20 (W), -35 (S), 55 (E), 40 (N)]
-  const bbox = [-20, -35, 55, 40];
+  const { projection = 'albers', customBbox } = options;
+  
+  // Default to African Bounding Box approx if no custom one provided
+  // [-20 (W), -35 (S), 55 (E), 40 (N)]
+  const targetBbox = customBbox || [-20, -35, 55, 40];
   
   const project = (coord: [number, number]): [number, number] => {
-    if (projection === 'albers') {
-      // Simplified Albers-like projection for Africa
+    if (projection === 'albers' && !customBbox) {
+      // Simplified Albers only works well for the continent scale without specific centering
       const lat0 = 0, lon0 = 20, phi1 = -20, phi2 = 20;
       const n = (Math.sin(phi1 * Math.PI / 180) + Math.sin(phi2 * Math.PI / 180)) / 2;
       const C = Math.pow(Math.cos(phi1 * Math.PI / 180), 2) + 2 * n * Math.sin(phi1 * Math.PI / 180);
@@ -107,12 +114,13 @@ export function toSVGPath(
         height - (padding + ay * (height - padding * 2))
       ];
     } else {
-      // Equirectangular
-      const scaleX = (width - padding * 2) / (bbox[2] - bbox[0]);
-      const scaleY = (height - padding * 2) / (bbox[3] - bbox[1]);
+      // Equirectangular / Linear scaling for custom bboxes (zoomed in countries)
+      const b = targetBbox;
+      const scaleX = (width - padding * 2) / (b[2] - b[0]);
+      const scaleY = (height - padding * 2) / (b[3] - b[1]);
       return [
-        padding + (coord[0] - bbox[0]) * scaleX,
-        height - (padding + (coord[1] - bbox[1]) * scaleY)
+        padding + (coord[0] - b[0]) * scaleX,
+        height - (padding + (coord[1] - b[1]) * scaleY)
       ];
     }
   };
@@ -156,7 +164,7 @@ export function generateSVGMap(
 ): string {
   const { colorResolver, projection = 'albers' } = options;
   const paths = geojson.features.map(feature => {
-    const d = toSVGPath(feature, dimensions, projection);
+    const d = toSVGPath(feature, dimensions, { projection });
     const fill = colorResolver ? colorResolver(feature) : '#cccccc';
     return `<path d="${d}" fill="${fill}" stroke="#ffffff" stroke-width="0.5">
       <title>${feature.properties?.name}</title>
@@ -167,6 +175,36 @@ export function generateSVGMap(
   <rect width="100%" height="100%" fill="#f0f8ff" />
   ${paths}
 </svg>`;
+}
+
+/**
+ * Generates an SVG map for a single country.
+ */
+export function generateCountrySVGMap(
+  feature: Feature,
+  dimensions: MapDimensions,
+  options: {
+    fill?: string,
+    showData?: boolean,
+    customLabel?: string
+  } = {}
+): string {
+  const { fill = '#cccccc', showData = false, customLabel } = options;
+  const countryBbox = bbox(feature) as [number, number, number, number];
+  
+  // padding adjustment for centering
+  const d = toSVGPath(feature, dimensions, { projection: 'equirectangular', customBbox: countryBbox });
+  
+  const properties = feature.properties || {};
+  const label = customLabel || properties.name;
+  const dataValue = showData && (properties as any).data ? `: ${(properties as any).data}` : '';
+
+  return `<svg viewBox="0 0 ${dimensions.width} ${dimensions.height}" xmlns="http://www.w3.org/2000/svg" style="background: #ffffff;">
+    <path d="${d}" fill="${fill}" stroke="#333333" stroke-width="1" />
+    <text x="50%" y="${dimensions.height - 20}" text-anchor="middle" font-family="Arial" font-size="20" fill="#333333">
+      ${label}${dataValue}
+    </text>
+  </svg>`;
 }
 
 /**

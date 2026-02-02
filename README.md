@@ -8,8 +8,8 @@ Enhanced GeoJSON data and utilities for African countries with TypeScript suppor
 - **Spatial Analysis**: Built-in geofencing to check if coordinates are within a specific country.
 - **Centroids & Bounding Boxes**: `centroid` and `bbox` coordinates for map markers and zooming.
 - **Flags & i18n**: Flag emojis and country names translated into FR, AR, PT, and SW.
-- **Advanced Map Rendering**: Built-in SVG generators with **Albers Equal Area Africa** projection support.
-- **CLI Tool**: Powerful terminal interface including a **Geography Quiz** mode.
+- **Advanced Map Rendering**: Built-in SVG generators for the **continent** or **individual countries** with Albers projection support.
+- **CLI Tool**: Powerful terminal interface including a **Geography Quiz** and **Country Renderer**.
 - **React Support**: Built-in `useAfricaMap` hook for modern web applications.
 - **Thematic Palettes**: Beautiful color presets like `Serengeti`, `Sahara`, and `Rainforest`.
 
@@ -40,6 +40,9 @@ npx african-countries render
 
 # Play the geography quiz
 npx african-countries quiz
+
+# Render a specific country SVG
+npx african-countries render-country Nigeria > nigeria.svg
 
 # Export SVG map
 npx african-countries export-svg > africa.svg
@@ -127,8 +130,11 @@ Returns all country names.
 #### `searchCountries(query: string)`
 Searches by name, code, or capital.
 
-#### `generateSVGMap(geojson, dimensions, colorResolver?)`
+#### `generateSVGMap(geojson, dimensions, options?)`
 Returns a full SVG string for rendering maps.
+
+#### `generateCountrySVGMap(countryFeature, dimensions, options?)`
+Returns a zoomed-in SVG string for a specific country, with support for custom labels and data.
 
 #### `joinDataToGeoJSON(geojson, externalData, joinKey?)`
 Merges external JS objects into GeoJSON properties for data visualization.

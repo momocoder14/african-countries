@@ -15,6 +15,7 @@ import {
   joinDataToGeoJSON,
   getChoroplethColor,
   generateSVGMap,
+  generateCountrySVGMap,
   toTerminalASCII,
   PALETTES
 } from './index';
@@ -125,6 +126,14 @@ describe('African Countries Library', () => {
       expect(svg).toContain('<svg');
       expect(svg).toContain('<path');
       expect(svg).toContain('viewBox="0 0 500 500"');
+    });
+
+    it('should generate SVG for a single country', () => {
+      const nigeria = getCountryByCode('NGA');
+      const svg = generateCountrySVGMap(nigeria as any, { width: 500, height: 500 }, { fill: '#ff0000', customLabel: 'Custom Nigeria' });
+      expect(svg).toContain('<svg');
+      expect(svg).toContain('fill="#ff0000"');
+      expect(svg).toContain('Custom Nigeria');
     });
 
     it('should generate terminal ASCII map', () => {
